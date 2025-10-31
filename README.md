@@ -67,15 +67,10 @@ APP_URL=http://127.0.0.1:8000
 
 # Base de datos SQLite (ya configurado)
 DB_CONNECTION=sqlite
-
-# Configuración de Bitget API (Opcional)
-# Si quieres usar credenciales globales para pruebas
-BITGET_MODE=live
-BITGET_API_KEY=tu_api_key_aqui
-BITGET_SECRET_KEY=tu_secret_key_aqui
-BITGET_PASSPHRASE=tu_passphrase_aqui
-BITGET_BASE_URL=https://api.bitget.com
 ```
+
+> **✅ Nota**: Las credenciales de Bitget API ya NO se configuran en el `.env`.
+> Ahora se gestionan desde la interfaz web después de iniciar sesión.
 
 ### 5. Generar la clave de la aplicación
 
@@ -119,13 +114,14 @@ La aplicación estará disponible en: **http://127.0.0.1:8000**
 Para usar la aplicación necesitas crear una API Key en Bitget:
 
 1. Ve a [Bitget](https://www.bitget.com) e inicia sesión
-2. Navega a **Cuenta → API Management**
+2. Navega a **Cuenta → API Management** o ve a: https://www.bitget.com/account/newapi
 3. Crea una nueva API Key con los siguientes permisos:
    - ✅ **Read** (lectura de balance)
    - ❌ **Trade** (no necesario para ver balance)
    - ❌ **Withdraw** (nunca habilites esto)
-4. Guarda tu **API Key**, **Secret Key** y **Passphrase**
-5. Agrégalos en la aplicación desde el panel de cuentas
+4. Guarda tu **API Key**, **Secret Key** y **Passphrase** (solo se muestran una vez)
+5. **Inicia sesión en la aplicación** y ve a "Cuentas API"
+6. Haz clic en **"Agregar Cuenta"** e ingresa tus credenciales allí
 
 ⚠️ **Importante**: Nunca compartas tus credenciales API y solo habilita los permisos necesarios.
 
@@ -133,29 +129,48 @@ Para usar la aplicación necesitas crear una API Key en Bitget:
 
 ### Primer Uso
 
-1. **Registrarse**: Accede a `/register` o haz clic en "Register" en la página de inicio
-2. **Iniciar Sesión**: Después del registro, serás redirigido al dashboard
-3. **Agregar Cuenta API**: 
-   - Ve a "Cuentas API" en el menú
-   - Haz clic en "Agregar Cuenta"
-   - Ingresa tus credenciales de Bitget
+1. **Registrarse**: 
+   - Accede a `/register` o la aplicación te redirigirá automáticamente
+   - Crea tu cuenta con email y contraseña
+
+2. **Iniciar Sesión**: 
+   - Después del registro, serás redirigido al dashboard
+
+3. **Agregar Cuenta API de Bitget**: 
+   - Ve a **"Cuentas API"** en el menú de navegación
+   - Haz clic en **"Agregar Cuenta"**
+   - Completa el formulario:
+     - Nombre de la cuenta (ej: "Cuenta Principal")
+     - API Key (obtenida de Bitget)
+     - Secret Key (obtenida de Bitget)
+     - Passphrase (obtenida de Bitget)
+     - Marca "Modo demostración" si quieres probar sin usar la API real
+
 4. **Ver Balance**: 
    - Navega a "Balance" en el menú
-   - El sistema mostrará tu balance de la cuenta activa
+   - El sistema mostrará tu balance usando la cuenta activa
+   - Si tienes varias cuentas, puedes cambiar entre ellas desde "Cuentas API"
 
 ### Gestión de Múltiples Cuentas
 
-- Puedes agregar múltiples cuentas API de Bitget
-- Solo una cuenta puede estar **activa** a la vez
-- La cuenta activa es la que se usa para consultar el balance
-- Puedes cambiar entre cuentas con un clic
+Cada usuario puede gestionar múltiples cuentas API de Bitget:
+
+- ➕ **Agregar cuentas**: Tantas como necesites desde "Cuentas API"
+- 🎯 **Cuenta activa**: Solo una cuenta está activa a la vez
+- 🔄 **Cambiar entre cuentas**: Con un solo clic desde la lista de cuentas
+- ✏️ **Editar credenciales**: Actualiza API keys cuando sea necesario
+- 🗑️ **Eliminar cuentas**: Borra cuentas que ya no uses
+
+Las credenciales se almacenan de forma segura en la base de datos (no en archivos `.env`).
 
 ### Modo Demo
 
-Si marcas "Modo demostración" al crear una cuenta:
-- ✅ La cuenta se guarda pero no se consulta la API real
-- ✅ Útil para pruebas sin gastar llamadas a la API
-- ✅ Puedes activarla más tarde cuando quieras usar la API real
+Al crear una cuenta, puedes marcar **"Modo demostración"**:
+
+- ✅ La cuenta se guarda pero **no consulta la API real** de Bitget
+- ✅ Útil para pruebas sin consumir llamadas a la API
+- ✅ Puedes desactivar el modo demo más tarde para usar la API real
+- ✅ Ideal para desarrollo y testing
 
 ## 🛠️ Comandos Útiles
 
